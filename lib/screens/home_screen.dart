@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   IconCard(
+                    cardPadding: 5,
                     cardChild: Icon(Icons.notifications_active_outlined),
                     cardColor: Colors.white,
                   ),
@@ -72,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(width: 5),
                   const IconCard(
+                      cardPadding: 5,
                       cardChild: Icon(
                         Icons.dashboard,
                         color: Colors.white,
@@ -111,18 +113,146 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.only(right: 10),
                       width: size.width * 0.65,
                       height: size.height * 0.45,
-                      child: const Card(
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
                         color: kLightCardColor,
-                        child: Stack(children: []),
+                        child: Stack(children: [
+                          Positioned(
+                            left: 0,
+                            bottom: 0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: SizedBox(
+                                width: size.width * 0.56,
+                                height: size.height * 0.13,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(13.0),
+                                  ),
+                                  color: Colors.white,
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Leaf Plant',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Text(
+                                              '\$7.90',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          ],
+                                        ),
+                                        IconCard(
+                                            cardPadding: 8,
+                                            cardChild: Icon(
+                                              Icons.shop,
+                                              color: Colors.white,
+                                              size: 14,
+                                            ),
+                                            cardColor: Colors.black),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Positioned(
+                            top: 0,
+                            right: 0,
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: IconCard(
+                                cardPadding: 8,
+                                cardChild: Icon(
+                                  Icons.heart_broken,
+                                  color: kDarkCardColor,
+                                  size: 14,
+                                ),
+                                cardColor: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ]),
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.only(left: 10),
                       width: size.width * 0.65,
                       height: size.height * 0.45,
-                      child: const Card(
-                        color: kDarkCardColor,
-                        child: Stack(children: []),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          gradient: LinearGradient(
+                            colors: [
+                              kDarkCardColor,
+                              kDarkCardColor,
+                            ],
+                            begin: FractionalOffset(1.0, 0.0),
+                            end: FractionalOffset(0.0, 1.0),
+                            stops: [
+                              0.1,
+                              1.0,
+                            ],
+                            tileMode: TileMode.clamp,
+                          ),
+                        ),
+                        // shape: RoundedRectangleBorder(
+                        //   borderRadius: BorderRadius.circular(20.0),
+                        // ),
+
+                        // color: ,
+                        child: Stack(children: [
+                          Positioned(
+                            left: 0,
+                            bottom: 0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: SizedBox(
+                                width: size.width * 0.58,
+                                height: size.height * 0.13,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(13.0),
+                                  ),
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Positioned(
+                            top: 0,
+                            right: 0,
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: IconCard(
+                                cardPadding: 10,
+                                cardChild: Icon(
+                                  Icons.heart_broken,
+                                  color: kDarkCardColor,
+                                  size: 14,
+                                ),
+                                cardColor: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ]),
                       ),
                     )
                   ],
@@ -131,9 +261,15 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 20),
               const Row(
                 children: [
-                  Icon(Icons.dashboard),
+                  Icon(
+                    Icons.dashboard,
+                    size: 12,
+                  ),
                   SizedBox(width: 10),
-                  Text('All Plants'),
+                  Text(
+                    'All Plants',
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
                 ],
               ),
             ],
@@ -146,6 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class IconCard extends StatelessWidget {
   const IconCard({
+    required this.cardPadding,
     required this.cardChild,
     required this.cardColor,
     super.key,
@@ -153,17 +290,18 @@ class IconCard extends StatelessWidget {
 
   final Color cardColor;
   final Widget cardChild;
+  final double cardPadding;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5.0),
+        borderRadius: BorderRadius.circular(cardPadding),
       ),
       color: cardColor,
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(10.0),
         child: cardChild,
       ),
     );
