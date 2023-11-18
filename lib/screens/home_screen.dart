@@ -1,7 +1,10 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:plantshop/components/icon_card.dart';
 import 'package:plantshop/utilities/constants.dart';
+
+import '../components/plant_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,9 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int _bottomNavIndex = 0;
 
   List<IconData> iconList = [
-    LineIcons.shoePrints,
-    Icons.scale,
-    LineIcons.folder,
+    LineIcons.shapes,
+    LineIcons.circle,
+    LineIcons.square,
   ];
 
   @override
@@ -36,14 +39,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'welcome 🔥',
+                        'welcome🔥',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: Colors.black),
+                            color: Colors.black87),
                       ),
                       Text(
-                        'Ayo Maselliene',
+                        'Kate Bush',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
@@ -51,10 +54,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  IconCard(
-                    cardPadding: 5,
-                    cardChild: Icon(Icons.notifications_active_outlined),
-                    cardColor: Colors.white,
+                  Badge(
+                    label: Center(child: Text('1')),
+                    backgroundColor: kDarkCardColor,
+                    child: IconCard(
+                      cardPadding: 5,
+                      cardChild: Icon(Icons.notifications_none_outlined),
+                      cardColor: Colors.white,
+                    ),
                   ),
                 ],
               ),
@@ -77,7 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Colors.black.withOpacity(0.5)),
                             hintText: '   Search',
                             hintStyle: TextStyle(
-                                color: Colors.black.withOpacity(0.5))),
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black.withOpacity(0.3))),
                       ),
                     ),
                   ),
@@ -96,7 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 children: [
                   const Icon(
-                    Icons.dashboard,
+                    Icons.grid_view,
+                    color: Colors.grey,
                     size: 12,
                   ),
                   const SizedBox(width: 10),
@@ -123,14 +132,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       size: size,
                       cardColor: kLightCardColor,
                       plantImage: 'lib/assets/Plant_4a.png',
-                      plantName: 'Leaf Plant',
+                      plantName: 'Rubber Plant',
                       plantPrice: '\$7.90',
                     ),
                     PlantCard(
                       size: size,
                       cardColor: kDarkCardColor,
                       plantImage: 'lib/assets/Plant_1a.png',
-                      plantName: 'Rubber Plant',
+                      plantName: 'Leaf Plant',
                       plantPrice: '\$5.90',
                     ),
                   ],
@@ -140,7 +149,8 @@ class _HomeScreenState extends State<HomeScreen> {
               const Row(
                 children: [
                   Icon(
-                    Icons.dashboard,
+                    Icons.grid_view,
+                    color: Colors.grey,
                     size: 12,
                   ),
                   SizedBox(width: 10),
@@ -154,22 +164,28 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.black,
-        splashColor: Colors.black,
-        child: const Icon(
-          Icons.picture_in_picture,
+      floatingActionButton: SizedBox(
+        width: 50,
+        child: FittedBox(
+          child: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: Colors.black,
+            splashColor: Colors.black,
+            child: const Icon(
+              LineIcons.shapes,
+            ),
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
         backgroundColor: kBottomNavBarColor,
         elevation: 20,
+        borderColor: kLightCardColor,
         shadow: const BoxShadow(
-          color: kDarkCardColor,
-          spreadRadius: 0.001,
-          blurRadius: 0.001,
+          color: Colors.transparent,
+          spreadRadius: 0.0,
+          blurRadius: 0.0,
         ),
         //splashColor: kBottomNavBarColor,
         //height: 80,
@@ -182,142 +198,6 @@ class _HomeScreenState extends State<HomeScreen> {
         //notchSmoothness: NotchSmoothness.defaultEdge,
         onTap: (index) => setState(() => _bottomNavIndex = index),
         //other params
-      ),
-    );
-  }
-}
-
-class PlantCard extends StatelessWidget {
-  const PlantCard({
-    super.key,
-    required this.size,
-    required this.cardColor,
-    required this.plantName,
-    required this.plantPrice,
-    required this.plantImage,
-  });
-
-  final Size size;
-  final Color cardColor;
-  final String plantPrice;
-  final String plantName;
-  final String plantImage;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(right: 10),
-      width: size.width * 0.7,
-      height: size.height * 0.5,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        color: cardColor,
-        child: Stack(children: [
-          Positioned(
-            left: 0,
-            bottom: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: SizedBox(
-                width: size.width * 0.6,
-                height: size.height * 0.13,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(13.0),
-                  ),
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              plantName,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              plantPrice,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.w600),
-                            )
-                          ],
-                        ),
-                        const IconCard(
-                            cardPadding: 8,
-                            cardChild: Icon(
-                              Icons.shop,
-                              color: Colors.white,
-                              size: 14,
-                            ),
-                            cardColor: Colors.black),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 5,
-            left: 5,
-            child: Container(
-              height: size.height * 0.4,
-              child: Image.asset(plantImage),
-            ),
-          ),
-          const Positioned(
-            top: 0,
-            right: 0,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: IconCard(
-                cardPadding: 8,
-                cardChild: Icon(
-                  Icons.heart_broken,
-                  color: kDarkCardColor,
-                  size: 14,
-                ),
-                cardColor: Colors.white,
-              ),
-            ),
-          ),
-        ]),
-      ),
-    );
-  }
-}
-
-class IconCard extends StatelessWidget {
-  const IconCard({
-    required this.cardPadding,
-    required this.cardChild,
-    required this.cardColor,
-    super.key,
-  });
-
-  final Color cardColor;
-  final Widget cardChild;
-  final double cardPadding;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(cardPadding),
-      ),
-      color: cardColor,
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: cardChild,
       ),
     );
   }
