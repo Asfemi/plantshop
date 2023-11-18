@@ -1,4 +1,6 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:plantshop/utilities/constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,6 +11,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _bottomNavIndex = 0;
+
+  List<IconData> iconList = [
+    LineIcons.shoePrints,
+    Icons.scale,
+    LineIcons.folder,
+  ];
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -144,6 +154,35 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.black,
+        splashColor: Colors.black,
+        child: const Icon(
+          Icons.picture_in_picture,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        backgroundColor: kBottomNavBarColor,
+        elevation: 20,
+        shadow: const BoxShadow(
+          color: kDarkCardColor,
+          spreadRadius: 0.001,
+          blurRadius: 0.001,
+        ),
+        //splashColor: kBottomNavBarColor,
+        //height: 80,
+        activeColor: Colors.black,
+        inactiveColor: Colors.grey,
+        leftCornerRadius: 25,
+        icons: iconList,
+        activeIndex: _bottomNavIndex,
+        gapLocation: GapLocation.end,
+        //notchSmoothness: NotchSmoothness.defaultEdge,
+        onTap: (index) => setState(() => _bottomNavIndex = index),
+        //other params
+      ),
     );
   }
 }
@@ -168,8 +207,8 @@ class PlantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(right: 10),
-      width: size.width * 0.65,
-      height: size.height * 0.45,
+      width: size.width * 0.7,
+      height: size.height * 0.5,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
@@ -182,7 +221,7 @@ class PlantCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: SizedBox(
-                width: size.width * 0.56,
+                width: size.width * 0.6,
                 height: size.height * 0.13,
                 child: Card(
                   shape: RoundedRectangleBorder(
@@ -227,10 +266,10 @@ class PlantCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 0,
-            left: 20,
+            top: 5,
+            left: 5,
             child: Container(
-              height: size.height * 0.35,
+              height: size.height * 0.4,
               child: Image.asset(plantImage),
             ),
           ),
