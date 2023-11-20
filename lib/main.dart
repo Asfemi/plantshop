@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
       title: 'Ayodele\'s Plant shop Ui implementation ',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        //useMaterial3: true,
+        //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: false,
       ),
       home: const HomeScreen(),
     );

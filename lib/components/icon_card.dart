@@ -21,7 +21,7 @@ class IconCard extends StatelessWidget {
       ),
       color: cardColor,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(cardPadding),
         child: cardChild,
       ),
     );

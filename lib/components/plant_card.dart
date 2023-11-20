@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:plantshop/components/icon_card.dart';
+import 'package:plantshop/screens/purchase_plant_screen.dart';
 
 import '../utilities/constants.dart';
 
@@ -12,6 +13,7 @@ class PlantCard extends StatelessWidget {
     required this.plantName,
     required this.plantPrice,
     required this.plantImage,
+    required this.index,
   });
 
   final Size size;
@@ -19,6 +21,7 @@ class PlantCard extends StatelessWidget {
   final String plantPrice;
   final String plantName;
   final String plantImage;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,14 @@ class PlantCard extends StatelessWidget {
         ),
         color: cardColor,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PurchasePlantScreen(index: index),
+              ),
+            );
+          },
           child: Stack(children: [
             Positioned(
               left: 0,

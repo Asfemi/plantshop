@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:plantshop/components/icon_card.dart';
 import 'package:plantshop/utilities/constants.dart';
+import 'package:plantshop/utilities/models.dart';
+import 'package:plantshop/utilities/utilities.dart';
 
 import '../components/plant_card.dart';
 
@@ -21,6 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
     LineIcons.circle,
     LineIcons.square,
   ];
+
+  List<PlantModel> plantData = Utilities.getPlantData();
 
   @override
   Widget build(BuildContext context) {
@@ -124,26 +128,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    PlantCard(
-                      size: size,
-                      cardColor: kLightCardColor,
-                      plantImage: 'lib/assets/Plant_4a.png',
-                      plantName: 'Rubber Plant',
-                      plantPrice: '\$7.90',
-                    ),
-                    PlantCard(
-                      size: size,
-                      cardColor: kDarkCardColor,
-                      plantImage: 'lib/assets/Plant_1a.png',
-                      plantName: 'Leaf Plant',
-                      plantPrice: '\$5.90',
-                    ),
-                  ],
-                ),
+              SizedBox(
+                height: size.height * 0.5,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: plantData.length,
+                    itemBuilder: (context, index) {
+                      return PlantCard(
+                        size: size,
+                        cardColor: plantData[index].plantCardColor,
+                        plantImage: plantData[index].plantImage,
+                        plantName: plantData[index].plantName,
+                        plantPrice: plantData[index].plantPrice,
+                        index: index,
+                      );
+                    }),
               ),
               const SizedBox(height: 20),
               const Row(
