@@ -31,7 +31,7 @@ class _PurchasePlantScreenState extends State<PurchasePlantScreen> {
               child: Container(
                 height: size.height * 0.7,
                 width: size.width,
-                color: kDarkCardColor,
+                color: plantData[widget.index].plantCardColor,
               ),
             ),
             Positioned(
@@ -45,8 +45,8 @@ class _PurchasePlantScreenState extends State<PurchasePlantScreen> {
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                 ),
                 child:
@@ -130,18 +130,40 @@ class _PurchasePlantScreenState extends State<PurchasePlantScreen> {
                 left: 0,
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(Icons.arrow_back_ios_outlined),
-                        color: Colors.white54,
-                      ),
-                      IconCard(cardPadding: 10, cardChild: Image.asset('name'), cardColor: Colors.lightGreen,)
-                    ],
+                  child: SizedBox(
+                    width: size.width * 0.9,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.arrow_back_ios_outlined),
+                          color: plantData[widget.index].plantCardColor == kDarkCardColor ?  Colors.white54 : Colors.black87,
+                        ),
+                        
+                        Spacer(),
+                        Card(
+                          elevation: 0,
+                          clipBehavior: Clip.hardEdge,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          color: Colors.transparent,
+                          child: Padding(
+                            padding: EdgeInsets.all(0),
+                            child: Image.asset(
+                              'lib/assets/pic.png',
+                              height: 35,
+                              width: 35,
+                              //scale: 20,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 )),
           ],
